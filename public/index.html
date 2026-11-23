@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build PowerPoint decks from LaTeX Beamer presentations.">
+  <title>Beamer Deck Maker</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">▱</span> Deck Maker</div>
+    <span class="workspace-label">LaTeX / Beamer</span>
+  </header>
+
+  <main>
+    <div class="intro">
+      <div class="eyebrow">PRESENTATION WORKSPACE</div>
+      <h1>Build a Beamer deck</h1>
+      <p>Generate or paste LaTeX, compile it, and export it to PowerPoint.</p>
+    </div>
+
+    <div class="workspace">
+      <div class="source-column">
+        <section class="panel" aria-labelledby="brief-heading">
+          <div class="panel-heading">
+            <span class="step" aria-hidden="true">01</span>
+            <h2 id="brief-heading">Presentation brief</h2>
+          </div>
+          <form id="generate-form">
+            <label class="sr-only" for="brief">Presentation brief</label>
+            <textarea id="brief" rows="3" maxlength="4000" required placeholder="Example: Explain Fourier series to first-year engineering students. Include a worked example."></textarea>
+            <div class="action-row">
+              <label for="slide-count" class="slide-count">Slides <input id="slide-count" type="number" min="3" max="12" value="6" required></label>
+              <button id="generate" type="submit" disabled>Generate LaTeX</button>
+            </div>
+            <p id="generation-note" class="note">Checking LLM configuration…</p>
+          </form>
+        </section>
+
+        <section class="panel" aria-labelledby="latex-heading">
+          <div class="panel-heading editor-heading">
+            <span class="step" aria-hidden="true">02</span>
+            <h2 id="latex-heading">Beamer source</h2>
+            <button class="text-button" id="sample" type="button">Load example</button>
+          </div>
+          <div class="editor">
+            <div class="editor-tab">main.tex</div>
+            <label class="sr-only" for="latex">Beamer LaTeX source</label>
+            <textarea id="latex" rows="11" spellcheck="false" maxlength="65536" placeholder="Paste a complete Beamer document here…"></textarea>
+          </div>
+          <div class="source-actions">
+            <form id="overleaf-form" method="post" action="https://www.overleaf.com/docs" target="_blank" rel="noopener">
+              <input type="hidden" name="encoded_snip" id="overleaf-source">
+              <input type="hidden" name="engine" value="pdflatex">
+              <button id="open-overleaf" type="submit" class="secondary" disabled>Open in Overleaf</button>
+            </form>
+            <button id="compile" type="button" disabled hidden>Compile &amp; build</button>
+            <button id="save-source" type="button" class="secondary" disabled>Save .tex</button>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel preview-panel" aria-labelledby="preview-heading">
+        <div class="panel-heading">
+          <span class="step" aria-hidden="true">03</span>
+          <h2 id="preview-heading">Preview &amp; export</h2>
+        </div>
+        <div class="preview-area">
+          <div id="empty-preview" class="empty-state">
+            <svg aria-hidden="true" width="52" height="52" viewBox="0 0 52 52" fill="none">
+              <rect x="6.5" y="10.5" width="39" height="26" rx="3" stroke="currentColor"/>
+              <path d="M17 42h18m-9-5v5M16 20h20m-20 6h12" stroke="currentColor" stroke-linecap="round"/>
+            </svg>
+            <strong>No slides yet</strong>
+            <p>Compile the source or import a compiled PDF to preview your deck.</p>
+          </div>
+          <img id="slide" alt="" hidden>
+        </div>
+        <div id="navigation" class="navigation" hidden>
+          <button id="previous" class="secondary" type="button" aria-label="Previous slide">←</button>
+          <span id="page-number" aria-live="polite"></span>
+          <button id="next" class="secondary" type="button" aria-label="Next slide">→</button>
+        </div>
+        <div class="preview-actions">
+          <button id="choose-pdf" class="secondary" type="button">Import PDF</button>
+          <input id="pdf" type="file" accept="application/pdf,.pdf" hidden>
+          <a id="download" class="button" download="deck.pptx" aria-disabled="true">Download .pptx</a>
+          <a id="download-pdf" class="button secondary" download="deck.pdf" aria-disabled="true">Download PDF</a>
+        </div>
+        <p class="note">Each PDF page becomes an image on a PowerPoint slide.</p>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <p id="setup-status" class="note" role="status"></p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

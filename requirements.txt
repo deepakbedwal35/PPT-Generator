@@ -1,0 +1,20 @@
+# Python Beamer Deck Maker
+
+# Core Runtime:
+#   Python >= 3.10
+#
+# The backend is built strictly using Python's standard library.
+# No third-party pip packages are required for normal execution.
+
+# System Prerequisites (External Tools):
+#   1. LaTeX distribution with Beamer support:
+#      - macOS: MacTeX or BasicTeX (`brew install --cask mactex-no-gui` or `brew install basictex`)
+#      - Linux: TeX Live (`sudo apt install texlive-latex-recommended texlive-latex-extra`)
+#      - Windows: MiKTeX (`winget install MiKTeX.MiKTeX` or https://miktex.org)
+#   2. Poppler PDF utilities (pdftoppm):
+#      - macOS: `brew install poppler`
+#      - Linux: `sudo apt install poppler-utils`
+#      - Windows: `winget install OSGeo.OSGeo4W` or Poppler binary release
+#
+# Optional Development Dependencies (for linting or alternative test runners):
+# pytest>=7.4.0

@@ -1,0 +1,36 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\title{Fourier Series}
+\subtitle{Building signals from simple waves}
+\author{Beamer Deck Maker}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{The idea}
+  A Fourier series writes a periodic function as a sum of harmonics.
+  \[
+    f(x) \sim \frac{a_0}{2}
+    + \sum_{n=1}^{\infty} \bigl(a_n\cos(nx) + b_n\sin(nx)\bigr)
+  \]
+  \begin{itemize}
+    \item Each harmonic oscillates at an integer multiple of the base frequency.
+    \item The coefficients tell us how much each harmonic contributes.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{A square wave}
+  The unit square wave that is positive on $(0,\pi)$ and negative on
+  $(-\pi,0)$ contains only odd sine harmonics.
+  \[
+    f(x) \sim \frac{4}{\pi}\left(\sin x + \frac{\sin 3x}{3}
+    + \frac{\sin 5x}{5} + \cdots\right)
+  \]
+  Adding harmonics makes the flat sections more accurate and the transitions sharper.
+\end{frame}
+
+\end{document}
